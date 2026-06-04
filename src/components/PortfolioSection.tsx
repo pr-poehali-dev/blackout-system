@@ -4,40 +4,40 @@ import { Button } from "@/components/ui/button"
 
 const projects = [
   {
-    title: "Умный помощник по выборам",
-    category: "AI/ML и веб-разработка",
-    image: "/omgekeerdestemwijzer-banner.png",
+    title: "Интернет-магазин строительных материалов",
+    category: "Разработка + SEO",
+    image: "/professional-corporate-website.png",
     description:
-      "AI-приложение для выборов. Пользователи задают вопросы о позициях партий и получают 100% фактические ответы из официальных программ с использованием RAG-технологии.",
-    url: "https://de-omgekeerde-stemwijzer.onrender.com/",
-    tags: ["Next.js", "AI/ML", "RAG", "TypeScript"],
+      "Разработали интернет-магазин с каталогом 5000+ позиций. SEO-продвижение вывело сайт в топ-3 по ключевым запросам за 4 месяца. Органический трафик вырос в 4 раза.",
+    url: "#portfolio",
+    tags: ["Разработка", "SEO", "Интернет-магазин"],
   },
   {
-    title: "Автомойка Tahsin",
+    title: "Лендинг для юридической компании",
     category: "Веб-дизайн и разработка",
-    image: "/autopoetsbedrijf-tahsin-project.png",
+    image: "/creative-portfolio-website.png",
     description:
-      "Профессиональный сайт для автомойки с 20-летним опытом. Полная презентация услуг, автомойки и гаража с современным адаптивным дизайном.",
-    url: "https://www.autopoetsbedrijftahsin.nl/",
-    tags: ["React", "Next.js", "Tailwind CSS"],
+      "Создали конверсионный лендинг с онлайн-записью на консультацию. Контекстная реклама в Яндекс.Директ снизила стоимость заявки в 2,5 раза.",
+    url: "#portfolio",
+    tags: ["Лендинг", "Контекстная реклама", "CRM"],
   },
   {
-    title: "Кадровое агентство CAN",
-    category: "Веб-разработка",
-    image: "/can-uitzendbureau-project.png",
+    title: "Корпоративный сайт ресторана",
+    category: "Разработка + Маркетинг",
+    image: "/restaurant-website-design.png",
     description:
-      "Кадровое агентство с 30-летним опытом в садоводческом секторе. Сайт с обзором услуг и прямыми контактами для работодателей и соискателей.",
-    url: "https://canbv.nl/",
-    tags: ["Next.js", "React", "Tailwind CSS"],
+      "Современный сайт с онлайн-меню, бронированием столиков и системой отзывов. SMM и email-маркетинг увеличили повторные визиты на 35%.",
+    url: "#portfolio",
+    tags: ["Разработка", "SMM", "Email-маркетинг"],
   },
   {
-    title: "Портфолио Murat Sahin",
-    category: "Портфолио-сайт",
-    image: "/murat-sahin-portfolio.png",
+    title: "Интернет-магазин модной одежды",
+    category: "E-commerce + SEO",
+    image: "/modern-ecommerce-website.png",
     description:
-      "Профессиональное портфолио full-stack разработчика. Демонстрация проектов, навыков и опыта с современным минималистичным дизайном и темной темой.",
-    url: "https://murat-sahin-dev.vercel.app/",
-    tags: ["Next.js", "TypeScript", "Tailwind CSS", ".NET Core"],
+      "Полноценный e-commerce проект с личным кабинетом, корзиной и интеграцией с 1С. Комплексное SEO обеспечило 60% заказов из органики уже через 6 месяцев.",
+    url: "#portfolio",
+    tags: ["E-commerce", "SEO", "1С-интеграция"],
   },
 ]
 
@@ -69,7 +69,7 @@ export function PortfolioSection() {
                     size="sm"
                     variant="secondary"
                     className="gap-2"
-                    onClick={() => window.open(project.url, "_blank")}
+                    onClick={() => project.url !== "#portfolio" && window.open(project.url, "_blank")}
                   >
                     Открыть проект <ExternalLink className="h-4 w-4" />
                   </Button>

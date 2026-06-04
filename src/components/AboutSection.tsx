@@ -11,10 +11,10 @@ const values = [
 ]
 
 const stats = [
-  { number: "50+", label: "Проектов" },
-  { number: "45+", label: "Довольных клиентов" },
-  { number: "30+", label: "Созданных логотипов" },
-  { number: "3+", label: "Года опыта" },
+  { number: "100+", label: "Проектов" },
+  { number: "80+", label: "Довольных клиентов" },
+  { number: "300%", label: "Средний рост трафика" },
+  { number: "5+", label: "Лет опыта" },
 ]
 
 export function AboutSection() {
@@ -27,19 +27,19 @@ export function AboutSection() {
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-semibold">
             <Sparkles className="h-4 w-4" />
-            О CodeCraft
+            О нашей студии
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 text-balance">
-            Качество, которое{" "}
+            Результат, который{" "}
             <span className="text-primary relative">
-              впечатляет
+              говорит сам
               <svg className="absolute -bottom-2 left-0 w-full" height="8" viewBox="0 0 200 8" fill="none">
                 <path d="M0 4C50 2 150 6 200 4" stroke="currentColor" strokeWidth="2" className="text-primary" />
               </svg>
             </span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto text-pretty leading-relaxed">
-            Создание сайта не должно быть дорогим. Мы разрабатываем индивидуальные решения, которые идеально соответствуют пожеланиям каждого клиента.
+            Мы — команда специалистов по созданию сайтов, SEO и интернет-маркетингу. Работаем на результат: больше трафика, больше заявок, больше продаж.
           </p>
         </div>
 

@@ -4,38 +4,40 @@ import { QuoteFormDialog } from "@/components/QuoteFormDialog"
 
 const pricingTiers = [
   {
-    name: "Базовый",
-    price: "99 900",
+    name: "Старт",
+    price: "49 900",
     features: [
-      "До 5 страниц",
+      "Лендинг до 5 блоков",
       "Адаптивный дизайн",
       "Базовая SEO-оптимизация",
-      "Форма обратной связи",
+      "Форма заявки",
+      "Подключение домена",
       "1 месяц поддержки",
     ],
     highlighted: false,
   },
   {
-    name: "Про",
-    price: "249 900",
+    name: "Бизнес",
+    price: "129 900",
     features: [
-      "До 15 страниц",
-      "Премиум-дизайн",
-      "Расширенная SEO-оптимизация",
-      "Интеграция CMS",
-      "Функционал e-commerce",
+      "Сайт до 10 страниц",
+      "Индивидуальный дизайн",
+      "Полная SEO-оптимизация",
+      "Интеграция с CRM",
+      "Контекстная реклама (настройка)",
       "3 месяца поддержки",
     ],
     highlighted: true,
   },
   {
-    name: "Индивидуальный",
+    name: "Комплекс",
     price: "По запросу",
     features: [
-      "Неограниченно страниц",
-      "Кастомный функционал",
-      "API-интеграции",
+      "Разработка любой сложности",
+      "SEO + реклама + SMM",
+      "Интернет-магазин / портал",
       "Персональный менеджер",
+      "Ежемесячная аналитика",
       "6 месяцев поддержки",
     ],
     highlighted: false,
@@ -121,8 +123,8 @@ export function PricingSection() {
 
         <div className="mt-12 text-center">
           <p className="text-sm text-muted-foreground">
-            Все тарифы включают <span className="text-primary font-semibold">бесплатную настройку хостинга</span> и{" "}
-            <span className="text-primary font-semibold">SSL-сертификат</span>
+            Все тарифы включают <span className="text-primary font-semibold">бесплатный аудит текущего сайта</span> и{" "}
+            <span className="text-primary font-semibold">консультацию по стратегии продвижения</span>
           </p>
         </div>
       </div>
