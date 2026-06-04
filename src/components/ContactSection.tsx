@@ -8,6 +8,12 @@ import { Mail, Phone, MapPin, Send, CheckCircle2 } from "lucide-react"
 
 const SEND_EMAIL_URL = "https://functions.poehali.dev/a7f439f7-680f-4dfe-8671-87d5effc45e9"
 
+const CONTACT_INFO = {
+  phone: "+7 900 123-45-67",
+  workdays: "Пн – Пт: 9:00 – 18:00",
+  weekend: "Выходные: по договорённости",
+}
+
 export function ContactSection() {
   const [formData, setFormData] = useState({
     name: "",
@@ -167,7 +173,7 @@ export function ContactSection() {
                   </div>
                   <div>
                     <h3 className="font-semibold mb-1">Телефон</h3>
-                    <p className="text-sm text-muted-foreground">+7 900 123-45-67</p>
+                    <p className="text-sm text-muted-foreground">{CONTACT_INFO.phone}</p>
                   </div>
                 </div>
               </CardContent>
@@ -182,9 +188,9 @@ export function ContactSection() {
                   <div>
                     <h3 className="font-semibold mb-1">Время работы</h3>
                     <p className="text-sm text-muted-foreground">
-                      Пн - Пт: 9:00 - 18:00
+                      {CONTACT_INFO.workdays}
                       <br />
-                      Выходные: по договоренности
+                      {CONTACT_INFO.weekend}
                     </p>
                   </div>
                 </div>
