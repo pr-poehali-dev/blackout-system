@@ -13,6 +13,9 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { CheckCircle2 } from "lucide-react"
+
+const SEND_EMAIL_URL = "https://functions.poehali.dev/a7f439f7-680f-4dfe-8671-87d5effc45e9"
 
 interface QuoteFormDialogProps {
   packageName?: string
@@ -23,6 +26,7 @@ interface QuoteFormDialogProps {
 
 export function QuoteFormDialog({ packageName, variant = "default", className, children }: QuoteFormDialogProps) {
   const [open, setOpen] = useState(false)
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle")
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -32,24 +36,31 @@ export function QuoteFormDialog({ packageName, variant = "default", className, c
     message: "",
   })
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    console.log("[v0] Quote form submitted:", formData)
-    // Here you would typically send the form data to your backend
-    setOpen(false)
-    // Reset form
-    setFormData({
-      name: "",
-      email: "",
-      phone: "",
-      company: "",
-      package: packageName || "",
-      message: "",
+    setStatus("loading")
+    const res = await fetch(SEND_EMAIL_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ...formData, source: `Тариф: ${formData.package || "не выбран"}` }),
     })
+    if (res.ok) {
+      setStatus("success")
+    } else {
+      setStatus("error")
+    }
+  }
+
+  const handleClose = (val: boolean) => {
+    setOpen(val)
+    if (!val) {
+      setStatus("idle")
+      setFormData({ name: "", email: "", phone: "", company: "", package: packageName || "", message: "" })
+    }
   }
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={open} onOpenChange={handleClose}>
       <DialogTrigger asChild>
         <Button variant={variant} className={className}>
           {children || "Запросить расчет"}
@@ -62,6 +73,14 @@ export function QuoteFormDialog({ packageName, variant = "default", className, c
             Заполните форму, и мы свяжемся с вами в ближайшее время для бесплатной консультации.
           </DialogDescription>
         </DialogHeader>
+        {status === "success" ? (
+          <div className="flex flex-col items-center gap-4 py-8 text-center">
+            <CheckCircle2 className="h-14 w-14 text-green-500" />
+            <h3 className="text-xl font-semibold">Заявка отправлена!</h3>
+            <p className="text-muted-foreground">Мы свяжемся с вами в ближайшее время.</p>
+            <Button onClick={() => handleClose(false)}>Закрыть</Button>
+          </div>
+        ) : (
         <form onSubmit={handleSubmit} className="space-y-4 mt-4">
           <div className="space-y-2">
             <Label htmlFor="name">Имя *</Label>
@@ -118,10 +137,10 @@ export function QuoteFormDialog({ packageName, variant = "default", className, c
                 <SelectValue placeholder="Выберите тариф" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="Базовый">Базовый</SelectItem>
-                <SelectItem value="Про">Про</SelectItem>
-                <SelectItem value="Индивидуальный">Индивидуальный</SelectItem>
-                <SelectItem value="Еще не определился">Еще не определился</SelectItem>
+                <SelectItem value="Старт">Старт</SelectItem>
+                <SelectItem value="Бизнес">Бизнес</SelectItem>
+                <SelectItem value="Комплекс">Комплекс</SelectItem>
+                <SelectItem value="Еще не определился">Ещё не определился</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -138,15 +157,19 @@ export function QuoteFormDialog({ packageName, variant = "default", className, c
             />
           </div>
 
+          {status === "error" && (
+            <p className="text-destructive text-sm">Ошибка отправки. Попробуйте позже.</p>
+          )}
           <div className="flex gap-3 pt-4">
-            <Button type="button" variant="outline" onClick={() => setOpen(false)} className="flex-1">
+            <Button type="button" variant="outline" onClick={() => handleClose(false)} className="flex-1">
               Отмена
             </Button>
-            <Button type="submit" className="flex-1">
-              Отправить заявку
+            <Button type="submit" className="flex-1" disabled={status === "loading"}>
+              {status === "loading" ? "Отправляем..." : "Отправить заявку"}
             </Button>
           </div>
         </form>
+        )}
       </DialogContent>
     </Dialog>
   )

@@ -6,9 +6,9 @@ export function Footer() {
       <div className="container mx-auto max-w-6xl">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
-            <h3 className="text-xl font-bold mb-4">WebStudio</h3>
+            <h3 className="text-xl font-bold mb-4">MOONLIGHT</h3>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              Создание сайтов, SEO и интернет-маркетинг.<br />© 2025 WebStudio. Все права защищены.
+              Создание сайтов, SEO и интернет-маркетинг.<br />© 2025 MOONLIGHT. Все права защищены.
             </p>
           </div>
 

@@ -4,7 +4,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { Mail, Phone, MapPin, Send } from "lucide-react"
+import { Mail, Phone, MapPin, Send, CheckCircle2 } from "lucide-react"
+
+const SEND_EMAIL_URL = "https://functions.poehali.dev/a7f439f7-680f-4dfe-8671-87d5effc45e9"
 
 export function ContactSection() {
   const [formData, setFormData] = useState({
@@ -13,11 +15,22 @@ export function ContactSection() {
     phone: "",
     message: "",
   })
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle")
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    console.log("[v0] Form submitted:", formData)
-    // Handle form submission
+    setStatus("loading")
+    const res = await fetch(SEND_EMAIL_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ...formData, source: "Контактная форма" }),
+    })
+    if (res.ok) {
+      setStatus("success")
+      setFormData({ name: "", email: "", phone: "", message: "" })
+    } else {
+      setStatus("error")
+    }
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -113,9 +126,18 @@ export function ContactSection() {
                       className="transition-all focus:scale-[1.02]"
                     />
                   </div>
-                  <Button type="submit" size="lg" className="w-full sm:w-auto group">
+                  {status === "success" && (
+                    <div className="flex items-center gap-2 text-green-600 font-medium">
+                      <CheckCircle2 className="h-5 w-5" />
+                      Заявка отправлена! Свяжемся с вами в ближайшее время.
+                    </div>
+                  )}
+                  {status === "error" && (
+                    <p className="text-destructive text-sm">Ошибка отправки. Попробуйте позже или напишите напрямую на nikita@moonlight.su</p>
+                  )}
+                  <Button type="submit" size="lg" className="w-full sm:w-auto group" disabled={status === "loading" || status === "success"}>
                     <Send className="mr-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                    Отправить
+                    {status === "loading" ? "Отправляем..." : "Отправить заявку"}
                   </Button>
                 </form>
               </CardContent>
@@ -131,7 +153,7 @@ export function ContactSection() {
                   </div>
                   <div>
                     <h3 className="font-semibold mb-1">E-mail</h3>
-                    <p className="text-sm text-muted-foreground">hello@example.com</p>
+                    <p className="text-sm text-muted-foreground">nikita@moonlight.su</p>
                   </div>
                 </div>
               </CardContent>
